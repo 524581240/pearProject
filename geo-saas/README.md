@@ -17,36 +17,64 @@ geo-saas/
   scripts/
 ```
 
-## 快速启动
+## 本机运行（推荐）
 
-### 1. 后端
+Cloud Agent 里的 `localhost` 在你电脑浏览器里打不开时，把代码拉到本机即可。
+
+### 环境要求
+
+- JDK 17+（建议 17/21）
+- Maven 3.8+
+- Node.js 18+ / npm
+
+### 拉取代码
 
 ```bash
+# 已有 pearProject 仓库
+git fetch origin
+git checkout cursor/geo-saas-platform-1331
+
+# 或只关心 GEO 工程时，用 IDE 打开子目录
+# File → Open → .../pearProject/geo-saas
+cd geo-saas
+```
+
+### 启动（开 3 个终端）
+
+```bash
+# 1) 后端 → http://localhost:8080
 cd backend
 mvn spring-boot:run
+
+# 2) 客户端 → http://localhost:5173
+cd web-client
+npm install
+npm run dev
+
+# 3) 管理后台 → http://localhost:5174
+cd web-admin
+npm install
+npm run dev
 ```
 
-- API: http://localhost:8080
-- H2 控制台: http://localhost:8080/h2-console  
+本机浏览器直接打开：
+
+- 客户端 http://localhost:5173 （`demo` / `demo123`）
+- 管理后台 http://localhost:5174 （`admin` / `admin123`）
+- API http://localhost:8080
+- H2 控制台 http://localhost:8080/h2-console  
   JDBC URL: `jdbc:h2:file:./data/geosaas`
 
-### 2. 客户端
+> 默认用嵌入式 H2 文件库，**不需要先装 MySQL/Redis**。数据在 `backend/data/`。
 
-```bash
-cd web-client && npm install && npm run dev
-```
+### 单独做成「本地项目」
 
-打开 http://localhost:5173  
-演示账号：`demo` / `demo123`
+`geo-saas/` 已自包含（backend + 双前端 + 文档）。你可以：
 
-### 3. 管理后台
+1. 用 Cursor/IDE **只打开 `geo-saas` 目录** 当独立项目；或  
+2. 以后把该目录拆到新仓库：`git subtree split` / 复制目录后 `git init`。
 
-```bash
-cd web-admin && npm install && npm run dev
-```
-
-打开 http://localhost:5174  
-管理员：`admin` / `admin123`
+功能上无需再改代码，本机与云端是同一套。
 
 ## 演示账号
 
