@@ -39,22 +39,37 @@ git checkout cursor/geo-saas-platform-1331
 cd geo-saas
 ```
 
-### 启动（开 3 个终端）
+### 一键启动（推荐，任意目录可执行）
 
 ```bash
-# 1) 后端 → http://localhost:8080
-cd backend
-mvn spring-boot:run
+bash geo-saas/scripts/start-local.sh
+# 或
+bash /绝对路径/geo-saas/scripts/start-local.sh
+```
 
-# 2) 客户端 → http://localhost:5173
-cd web-client
-npm install
-npm run dev
+脚本会检测端口：已在跑则跳过，避免 `Port 8080 was already in use`。
 
-# 3) 管理后台 → http://localhost:5174
-cd web-admin
-npm install
-npm run dev
+### 或开 3 个终端手动启动
+
+**注意：不要把下面三行粘到同一个已进入 `backend` 的终端里连跑。**
+`cd geo-saas/backend && mvn ...` 成功/失败后，当前目录会留在 `backend`，
+接着再 `cd geo-saas/web-client` 会报 `No such file or directory`。
+
+```bash
+# 终端 1 — 若 8080 已有服务可跳过
+cd /你的路径/geo-saas/backend && mvn spring-boot:run
+
+# 终端 2
+cd /你的路径/geo-saas/web-client && npm install && npm run dev
+
+# 终端 3
+cd /你的路径/geo-saas/web-admin && npm install && npm run dev
+```
+
+释放端口（需要重启时）：
+
+```bash
+fuser -k 8080/tcp 5173/tcp 5174/tcp
 ```
 
 本机浏览器直接打开：
