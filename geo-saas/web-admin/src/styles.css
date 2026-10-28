@@ -1,0 +1,10 @@
+:root {
+  --geo-bg: #f3f4f6;
+  --geo-ink: #111827;
+  --geo-accent: #1d4ed8;
+}
+* { box-sizing: border-box; }
+html, body, #app { margin: 0; height: 100%; font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; color: var(--geo-ink); background: var(--geo-bg); }
+.page-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px; }
+.page-title { font-size: 20px; font-weight: 600; margin: 0 0 16px; }
+.muted { color: #6b7280; font-size: 13px; }
